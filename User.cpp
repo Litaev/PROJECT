@@ -7,7 +7,7 @@ void User::addCar(){
     system("cls");
     string car_name, car_gov_number;
     unsigned int car_mileage, car_fuel_type;
-    Car *newCargit ;
+    Car *newCar;
     cout << "Enter car name: ";
     cin >> car_name;
     cout << "Enter car government number: ";
