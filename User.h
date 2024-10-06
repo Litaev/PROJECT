@@ -6,7 +6,7 @@
 #include "Car.h"
 
 class User {
-    std::vector<Car*> car_list;
+    std::vector<std::shared_ptr<Car>> car_list;
     float user_money_spent = 0;
     float user_money_spent_refueling = 0;
     float user_money_spent_service = 0;
@@ -18,7 +18,7 @@ public:
     float getUserMoneySpent();
     float getUserMoneySpentService();
     float getUserMoneySpentRefueling();
-    std::vector<Car*> getCarList();
+    std::vector<std::shared_ptr<Car>> getCarList();
 };
 
 #endif // USER_H

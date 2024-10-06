@@ -56,9 +56,9 @@ void Car::addEvent(){
     cout << "2 - Other." << endl;
     cout << "Your choice: ";
     cin >> chosen_event;
-    Event* new_event;
+    std::shared_ptr<Event> new_event;
     if (chosen_event == 0){
-        new_event = new CarService;
+        new_event = {std::make_shared<CarService>()};
         unsigned int chosen_service;
         string information;
         cout << "Choose service: " << endl;
@@ -77,10 +77,10 @@ void Car::addEvent(){
         new_event->setServiceTypeAsString(information);
     }
     else if (chosen_event == 1){
-        new_event = new Refueling;
+        new_event = {std::make_shared<Refueling>()};
     }
     else{
-        new_event = new Event;
+        new_event = {std::make_shared<Event>()};
     }
     new_event->setEventType(static_cast<CONSUMPTION_NAME>(chosen_event));
     cout << "\n Enter money spent: ";
@@ -128,22 +128,26 @@ void Car::addEvent(){
     }
     event_list.push_back(new_event);
 }
-vector<Event*> Car::getEventList(){
+vector<std::shared_ptr<Event>> Car::getEventList(){
     return event_list;
 }
 void Car::deleteEventList(){
     event_list.clear();
+    updateCarMoneySpent();
 };
 void Car::deleteEventListElement(){
     system("cls");
     unsigned int chosen_id;
     cout << "Choose id of event to delete:" << endl;
     for (unsigned int element_id = 0; element_id < event_list.size(); element_id++){
-        cout << "ID: " << element_id << " Event name: " << event_list[element_id]->consumptionNameToStringFun(event_list[element_id]->getEventType()) << " Event date: " << event_list[element_id]->getEventDateAsString() << endl;
+        cout << "ID: " << element_id << " Event name: " << event_list[element_id]->
+        consumptionNameToStringFun(event_list[element_id]->getEventType()) << " Event date: "
+        << event_list[element_id]->getEventDateAsString() << endl;
     }
     cout << "Your choice: ";
     cin >> chosen_id;
     event_list.erase(event_list.begin()+chosen_id);
+    updateCarMoneySpent();
 }
 std::string Car::FuelTypeToStringFun(FUEL_TYPE name){
     return FuelTypeToString[name];
@@ -153,5 +157,11 @@ void Car::printEventList(){
         cout << "----Event N" << x << "----" << endl;
         event_list[x-1]->printEventInfo();
         cout << "----Event N" << x << "----" << endl;
+    }
+}
+void Car::updateCarMoneySpent(){
+    car_money_spent = 0;
+    for (auto & event : event_list){
+        car_money_spent += event->getMoneyValue();
     }
 }

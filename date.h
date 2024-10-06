@@ -2,6 +2,7 @@
 #define DATE_H
 
 #include <string>
+#include <memory>
 
 class Date {
     unsigned int year;

@@ -1,4 +1,3 @@
-
 #include "User.h"
 #include "Event.h"
 using namespace std;
@@ -7,7 +6,7 @@ void User::addCar(){
     system("cls");
     string car_name, car_gov_number;
     unsigned int car_mileage, car_fuel_type;
-    Car *newCar;
+    std::shared_ptr<Car> newCar {std::make_shared<Car>()};
     cout << "Enter car name: ";
     cin >> car_name;
     cout << "Enter car government number: ";
@@ -59,7 +58,7 @@ void User::updateUserMoneySpent(){
     user_money_spent_service = 0;
     for (auto & car : car_list){
         user_money_spent += car->getCarMoneySpent();
-        for (Event* & event : car->getEventList()){
+        for (auto & event : car->getEventList()){
             if (event->getEventType() == SERVICE){
                 user_money_spent_service += event->getMoneyValue();
             }
@@ -80,6 +79,6 @@ float User::getUserMoneySpentRefueling(){
     return user_money_spent_refueling;
 }
 
-vector<Car*> User::getCarList(){
+vector<std::shared_ptr<Car>> User::getCarList(){
     return car_list;
 }
