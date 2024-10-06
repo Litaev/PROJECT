@@ -1,29 +1,32 @@
 #include <map>
 #include <string>
+#include "Enums.h"
 
-enum FUEL_TYPE { PETROL, DIESEL, PROPANE_BUTANE, METHANE, ELECTRICITY };
-std::map<FUEL_TYPE, std::string> FuelTypeToString = {
-        {PETROL, "Petrol"},
-        {DIESEL, "Diesel"},
-        {PROPANE_BUTANE, "Propane-butane"},
-        {METHANE, "Methane"},
-        {ELECTRICITY, "Electricity"}
+
+
+const std::map<FUEL_TYPE, std::string> FuelTypeToString = {
+        {FUEL_TYPE::PETROL, "Petrol"},
+        {FUEL_TYPE::DIESEL, "Diesel"},
+        {FUEL_TYPE::PROPANE_BUTANE, "Propane-butane"},
+        {FUEL_TYPE::METHANE, "Methane"},
+        {FUEL_TYPE::ELECTRICITY, "Electricity"}
 };
 
-enum CONSUMPTION_NAME { SERVICE, REFUELING, OTHER_CONSUMPTION };
-std::map<CONSUMPTION_NAME, std::string> ConsumptionNameToString = {
-        {SERVICE, "Service"},
-        {REFUELING, "Refueling"},
-        {OTHER_CONSUMPTION, "Other"}
+
+
+const std::map<CONSUMPTION_NAME, std::string> ConsumptionNameToString = {
+        {CONSUMPTION_NAME::SERVICE, "Service"},
+        {CONSUMPTION_NAME::REFUELING, "Refueling"},
+        {CONSUMPTION_NAME::OTHER_CONSUMPTION, "Other"}
 };
 
-enum SERVICE_NAME { MAINTENANCE, REPAIR, TUNING, DETAIL, DIAGNOSTICS, TIRE_FITTING, OTHER_SERVICE };
-std::map<SERVICE_NAME, std::string> ServiceNameToString = {
-        {MAINTENANCE, "Maintenance"},
-        {REPAIR, "Repair"},
-        {TUNING, "Tuning"},
-        {DETAIL, "Detail"},
-        {DIAGNOSTICS, "Diagnostics"},
-        {TIRE_FITTING, "Tire fitting"},
-        {OTHER_SERVICE, "Other"}
+
+const std::map<SERVICE_NAME, std::string> ServiceNameToString = {
+        {SERVICE_NAME::MAINTENANCE, "Maintenance"},
+        {SERVICE_NAME::REPAIR, "Repair"},
+        {SERVICE_NAME::TUNING, "Tuning"},
+        {SERVICE_NAME::DETAIL, "Detail"},
+        {SERVICE_NAME::DIAGNOSTICS, "Diagnostics"},
+        {SERVICE_NAME::TIRE_FITTING, "Tire fitting"},
+        {SERVICE_NAME::OTHER_SERVICE, "Other"}
 };

@@ -6,7 +6,7 @@
 using namespace std;
 
 
-string Car::getCarName(){
+string Car::getCarName() const{
     return car_name;
 }
 void Car::setCarName(string new_car_name) {
@@ -15,28 +15,28 @@ void Car::setCarName(string new_car_name) {
 void Car::setCarFuelType(FUEL_TYPE new_fuel_type){
     car_fuel_type = new_fuel_type;
 }
-FUEL_TYPE Car::getCarFuelType(){
+FUEL_TYPE Car::getCarFuelType() const{
     return car_fuel_type;
 }
-string Car::getCarGovNumber() {
+string Car::getCarGovNumber() const{
     return car_gov_number;
 }
 void Car::setCarGovNumber(string new_car_gov_number) {
     car_gov_number = new_car_gov_number;
 }
-unsigned int Car::getCarMileage() {
+unsigned int Car::getCarMileage() const{
     return car_mileage;
 }
 void Car::setCarMileage(unsigned int new_car_mileage) {
     car_mileage = new_car_mileage;
 }
-float Car::getCarMoneySpent() {
+float Car::getCarMoneySpent() const{
     return car_money_spent;
 }
 void Car::setCarMoneySpent(float carMoneySpent) {
     car_money_spent = carMoneySpent;
 }
-std::string Car::getCarAddDateAsString(){
+std::string Car::getCarAddDateAsString() const{
     return car_add_date.getDateAsString();
 }
 void Car::setCar(string new_car_name, string new_car_gov_number, unsigned new_car_mileage, FUEL_TYPE new_car_fuel_type){
@@ -58,7 +58,7 @@ void Car::addEvent(){
     cin >> chosen_event;
     std::shared_ptr<Event> new_event;
     if (chosen_event == 0){
-        new_event = {std::make_shared<CarService>()};
+        new_event = std::make_shared<CarService>();
         unsigned int chosen_service;
         string information;
         cout << "Choose service: " << endl;
@@ -78,25 +78,9 @@ void Car::addEvent(){
     }
     else if (chosen_event == 1){
         new_event = {std::make_shared<Refueling>()};
-    }
-    else{
-        new_event = {std::make_shared<Event>()};
-    }
-    new_event->setEventType(static_cast<CONSUMPTION_NAME>(chosen_event));
-    cout << "\n Enter money spent: ";
-    cin >> money_spent;
-    car_money_spent += money_spent;
-    new_event->setMoneyValue(money_spent);
-    new_event->setEventDateNow();
-    cout << "\n Enter car mileage: ";
-    cin >> car_mileage;
-    new_event->setCarMileage(car_mileage);
-    if (static_cast<CONSUMPTION_NAME>(chosen_event) == CONSUMPTION_NAME::SERVICE){
-
-    }
-    else if (static_cast<CONSUMPTION_NAME>(chosen_event) == CONSUMPTION_NAME::REFUELING){
         unsigned int chosen_fuel_type;
-        float chosen_price_per_litre, chosen_amount_of_litres;
+        float chosen_price_per_litre;
+        float chosen_amount_of_litres;
         cout << "Choose fuel type:" << endl;
         cout << "0 - Petrol;" << endl;
         cout << "1 - Diesel;" << endl;
@@ -126,9 +110,21 @@ void Car::addEvent(){
         new_event->setAmountOfLitres(chosen_amount_of_litres);
         new_event->setPricePerLitre(chosen_price_per_litre);
     }
+    else{
+        new_event = {std::make_shared<Event>()};
+    }
+    new_event->setEventType(static_cast<CONSUMPTION_NAME>(chosen_event));
+    cout << "\n Enter money spent: ";
+    cin >> money_spent;
+    car_money_spent += money_spent;
+    new_event->setMoneyValue(money_spent);
+    new_event->setEventDateNow();
+    cout << "\n Enter car mileage: ";
+    cin >> car_mileage;
+    new_event->setCarMileage(car_mileage);
     event_list.push_back(new_event);
 }
-vector<std::shared_ptr<Event>> Car::getEventList(){
+vector<std::shared_ptr<Event>> Car::getEventList() const{
     return event_list;
 }
 void Car::deleteEventList(){
@@ -140,7 +136,7 @@ void Car::deleteEventListElement(){
     unsigned int chosen_id;
     cout << "Choose id of event to delete:" << endl;
     for (unsigned int element_id = 0; element_id < event_list.size(); element_id++){
-        cout << "ID: " << element_id << " Event name: " << event_list[element_id]->
+        cout << "ID: " << element_id << " Event name: " << event_list[element_id]->Event::
         consumptionNameToStringFun(event_list[element_id]->getEventType()) << " Event date: "
         << event_list[element_id]->getEventDateAsString() << endl;
     }
@@ -150,9 +146,13 @@ void Car::deleteEventListElement(){
     updateCarMoneySpent();
 }
 std::string Car::FuelTypeToStringFun(FUEL_TYPE name){
-    return FuelTypeToString[name];
+    const auto& it = FuelTypeToString.find(name);
+    if (it != FuelTypeToString.end()) {
+        return it->second;
+    }
+    return "Unknown";
 }
-void Car::printEventList(){
+void Car::printEventList() const{
     for (unsigned x = 1; x <= event_list.size(); x++){
         cout << "----Event N" << x << "----" << endl;
         event_list[x-1]->printEventInfo();
@@ -161,7 +161,7 @@ void Car::printEventList(){
 }
 void Car::updateCarMoneySpent(){
     car_money_spent = 0;
-    for (auto & event : event_list){
+    for (const auto & event : event_list){
         car_money_spent += event->getMoneyValue();
     }
 }

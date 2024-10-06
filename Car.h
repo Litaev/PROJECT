@@ -17,23 +17,23 @@ class Car {
     std::vector<std::shared_ptr<Event>> event_list;
 public:
     void setCar(std::string new_car_name, std::string new_car_gov_number, unsigned new_car_mileage, FUEL_TYPE new_car_fuel_type);
-    std::string getCarName();
+    std::string getCarName() const;
     void setCarName(std::string new_car_name);
     void setCarFuelType(FUEL_TYPE new_fuel_type);
-    FUEL_TYPE getCarFuelType();
-    std::string getCarGovNumber();
+    FUEL_TYPE getCarFuelType() const;
+    std::string getCarGovNumber() const;
     void setCarGovNumber(std::string new_car_gov_number);
-    unsigned int getCarMileage();
+    unsigned int getCarMileage() const;
     void setCarMileage(unsigned int new_car_mileage);
-    float getCarMoneySpent();
+    float getCarMoneySpent() const;
     void setCarMoneySpent(float carMoneySpent);
-    std::string getCarAddDateAsString();
+    std::string getCarAddDateAsString() const;
     void addEvent();
-    std::vector<std::shared_ptr<Event>> getEventList();
+    std::vector<std::shared_ptr<Event>> getEventList() const;
     void deleteEventList();
     void deleteEventListElement();
     static std::string FuelTypeToStringFun(FUEL_TYPE name);
-    void printEventList();
+    void printEventList() const;
     void updateCarMoneySpent();
 };
 

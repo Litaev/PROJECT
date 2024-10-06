@@ -4,8 +4,10 @@ using namespace std;
 
 void User::addCar(){
     system("cls");
-    string car_name, car_gov_number;
-    unsigned int car_mileage, car_fuel_type;
+    string car_name;
+    string car_gov_number;
+    unsigned int car_mileage;
+    unsigned int car_fuel_type;
     std::shared_ptr<Car> newCar {std::make_shared<Car>()};
     cout << "Enter car name: ";
     cin >> car_name;
@@ -38,7 +40,7 @@ void User::deleteCar() {
     car_list[chosen_id]->deleteEventList();
     car_list.erase(car_list.begin() + chosen_id);
 }
-void User::printCarsInfo(){
+void User::printCarsInfo() const{
     cout << "Your amount of cars " << car_list.size() << ":" << endl;
     for (unsigned x = 0; x < car_list.size(); x++){
         cout << "--- Car " << x+1 << " ---" << endl;
@@ -47,7 +49,7 @@ void User::printCarsInfo(){
         cout << "Car mileage: " << car_list[x]->getCarMileage() << endl;
         cout << "Car money spent: " << car_list[x]->getCarMoneySpent() << endl;
         cout << "Car add date: " << car_list[x]->getCarAddDateAsString() << endl;
-        cout << "Car fuel type: " << car_list[x]->FuelTypeToStringFun(car_list[x]->getCarFuelType()) << endl;
+        cout << "Car fuel type: " << car_list[x]->Car::FuelTypeToStringFun(car_list[x]->getCarFuelType()) << endl;
         cout << "Car events amount: " << car_list[x]->getEventList().size() << endl;
         cout << "--- Car " << x+1 << " ---" << endl;
     }
@@ -56,29 +58,29 @@ void User::updateUserMoneySpent(){
     user_money_spent = 0;
     user_money_spent_refueling = 0;
     user_money_spent_service = 0;
-    for (auto & car : car_list){
+    for (const auto & car : car_list){
         user_money_spent += car->getCarMoneySpent();
-        for (auto & event : car->getEventList()){
-            if (event->getEventType() == SERVICE){
+        for (const auto & event : car->getEventList()){
+            if (event->getEventType() == CONSUMPTION_NAME::SERVICE){
                 user_money_spent_service += event->getMoneyValue();
             }
-            else if (event->getEventType() == REFUELING){
+            else if (event->getEventType() == CONSUMPTION_NAME::REFUELING){
                 user_money_spent_refueling += event->getMoneyValue();
             }
         }
     }
 }
 
-float User::getUserMoneySpent(){
+float User::getUserMoneySpent() const{
     return user_money_spent;
 }
-float User::getUserMoneySpentService(){
+float User::getUserMoneySpentService() const{
     return user_money_spent_service;
 }
-float User::getUserMoneySpentRefueling(){
+float User::getUserMoneySpentRefueling() const{
     return user_money_spent_refueling;
 }
 
-vector<std::shared_ptr<Car>> User::getCarList(){
+vector<std::shared_ptr<Car>> User::getCarList() const{
     return car_list;
 }

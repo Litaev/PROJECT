@@ -4,19 +4,19 @@
 using namespace std;
 
 
-float Event::getMoneyValue() {
+float Event::getMoneyValue() const{
     return moneyValue;
 }
 void Event::setMoneyValue(float newMoneyValue) {
     moneyValue = newMoneyValue;
 }
-Date Event::getEventDate() {
+Date Event::getEventDate() const{
     return event_date;
 }
 void Event::setEventDateNow() {
     event_date.setNowDate();
 }
-unsigned int Event::getCarMileage() {
+unsigned int Event::getCarMileage() const{
     return car_mileage;
 }
 void Event::setCarMileage(unsigned int carMileage) {
@@ -25,23 +25,16 @@ void Event::setCarMileage(unsigned int carMileage) {
 void Event::setEventType(CONSUMPTION_NAME consumption){
     event_type = consumption;
 }
-CONSUMPTION_NAME Event::getEventType() {
+CONSUMPTION_NAME Event::getEventType() const {
     return event_type;
 }
-string Event::getEventDateAsString(){
+string Event::getEventDateAsString() const{
     return event_date.getDateAsString();
 }
 string Event::consumptionNameToStringFun(CONSUMPTION_NAME name){
-    return ConsumptionNameToString[name];
+    const auto& it = ConsumptionNameToString.find(name);
+    if (it != ConsumptionNameToString.end()) {
+        return it->second;
+    }
+    return "Unknown";
 }
-void Event::printEventInfo(){
-    cout << "Event Type: Other" << endl;
-    cout << "Price: " << getMoneyValue() << endl;
-    cout << "Date: " << getEventDateAsString() << endl;
-    cout << "Car mileage: " << getCarMileage() << endl;
-}
-void Event::setFuelType(FUEL_TYPE carFuelType){}
-void Event::setAmountOfLitres(float amountOfLitres){}
-void Event::setPricePerLitre(float pricePerLitre){}
-void Event::setServiceType(SERVICE_NAME serviceType){}
-void Event::setServiceTypeAsString(std::string &serviceName){}

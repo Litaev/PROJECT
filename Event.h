@@ -12,22 +12,22 @@ class Event {
     unsigned int car_mileage;
     std::string event_comment;
 public:
-    float getMoneyValue();
+    float getMoneyValue() const;
     void setMoneyValue(float newMoneyValue);
-    Date getEventDate();
+    Date getEventDate() const;
     void setEventDateNow();
-    unsigned int getCarMileage();
+    unsigned int getCarMileage() const;
     void setCarMileage(unsigned int carMileage);
     void setEventType(CONSUMPTION_NAME consumption);
-    CONSUMPTION_NAME getEventType();
-    std::string getEventDateAsString();
+    CONSUMPTION_NAME getEventType() const;
+    std::string getEventDateAsString() const;
     static std::string consumptionNameToStringFun(CONSUMPTION_NAME name);
-    virtual void printEventInfo();
-    virtual void setFuelType(FUEL_TYPE carFuelType);
-    virtual void setAmountOfLitres(float amountOfLitres);
-    virtual void setPricePerLitre(float pricePerLitre);
-    virtual void setServiceType(SERVICE_NAME serviceType);
-    virtual void setServiceTypeAsString(std::string &serviceName);
+    virtual void printEventInfo(){/*VIRTUAL*/};
+    virtual void setFuelType(FUEL_TYPE carFuelType){/*VIRTUAL*/};
+    virtual void setAmountOfLitres(float amountOfLitres){/*VIRTUAL*/};
+    virtual void setPricePerLitre(float pricePerLitre){/*VIRTUAL*/};
+    virtual void setServiceType(SERVICE_NAME serviceType){/*VIRTUAL*/};
+    virtual void setServiceTypeAsString(std::string &serviceName){/*VIRTUAL*/};
 };
 
 #endif // EVENT_H

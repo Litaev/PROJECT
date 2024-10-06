@@ -8,11 +8,11 @@ class Refueling : public Event {
     float amount_of_litres;
     float price_per_litre;
 public:
-    FUEL_TYPE getFuelType();
+    FUEL_TYPE getFuelType() const;
     void setFuelType(FUEL_TYPE carFuelType) override;
-    float getAmountOfLitres();
+    float getAmountOfLitres() const;
     void setAmountOfLitres(float amountOfLitres) override;
-    float getPricePerLitre();
+    float getPricePerLitre() const;
     void setPricePerLitre(float pricePerLitre) override;
     std::string FuelTypeNameToStringFun();
     void printEventInfo() override;

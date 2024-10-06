@@ -13,12 +13,12 @@ class User {
 public:
     void addCar();
     void deleteCar();
-    void printCarsInfo();
+    void printCarsInfo() const;
     void updateUserMoneySpent();
-    float getUserMoneySpent();
-    float getUserMoneySpentService();
-    float getUserMoneySpentRefueling();
-    std::vector<std::shared_ptr<Car>> getCarList();
+    float getUserMoneySpent() const;
+    float getUserMoneySpentService() const ;
+    float getUserMoneySpentRefueling() const;
+    std::vector<std::shared_ptr<Car>> getCarList() const;
 };
 
 #endif // USER_H

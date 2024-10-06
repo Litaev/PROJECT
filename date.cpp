@@ -1,13 +1,13 @@
 
 #include "date.h"
 #include <time.h>
-unsigned int Date::getYear(){
+unsigned int Date::getYear() const{
     return year;
 }
-unsigned int Date::getMonth(){
+unsigned int Date::getMonth() const{
     return month;
 }
-unsigned int Date::getDay(){
+unsigned int Date::getDay() const{
     return day;
 }
 void Date::setYear(unsigned int new_year){
@@ -20,12 +20,12 @@ void Date::setDay(unsigned int new_day){
     day = new_day;
 }
 void Date::setNowDate(){
-    time_t t = time(0);
+    time_t t = time(nullptr);
     tm* now = localtime(&t);
     setYear(now->tm_year+1900);
     setMonth(now->tm_mon+1);
     setDay(now->tm_mday);
 }
-std::string Date::getDateAsString(){
+std::string Date::getDateAsString() const{
     return std::to_string(day) + "." + std::to_string(month) + "." + std::to_string(year);
 }
