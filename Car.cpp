@@ -146,10 +146,7 @@ void Car::deleteEventListElement(){
     updateCarMoneySpent();
 }
 std::string Car::FuelTypeToStringFun(FUEL_TYPE name){
-    if (FuelTypeToString.find(name) != FuelTypeToString.end()) {
-        return FuelTypeToString.find(name)->second;
-    }
-    return "Unknown";
+    return FuelTypeToString.find(name)->second;
 }
 void Car::printEventList() const{
     for (unsigned x = 1; x <= event_list.size(); x++){

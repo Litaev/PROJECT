@@ -16,10 +16,7 @@ void CarService::setServiceTypeAsString(std::string &serviceName) {
     service_type_string = serviceName;
 }
 std::string CarService::ServiceNameToStringFun() const{
-    if (ServiceNameToString.find(service_type) != ServiceNameToString.end()) {
-        return ServiceNameToString.find(service_type)->second;
-    }
-    return "Unknown";
+    return ServiceNameToString.find(service_type)->second;
 }
 void CarService::printEventInfo(){
     cout << "Event Type: Service" << endl;

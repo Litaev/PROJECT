@@ -1,6 +1,6 @@
 
 #include "date.h"
-#include <ctime>
+
 unsigned int Date::getYear() const{
     return year;
 }
@@ -20,11 +20,13 @@ void Date::setDay(unsigned int new_day){
     day = new_day;
 }
 void Date::setNowDate(){
-    time_t t = time(nullptr);
-    tm* now = localtime(&t);
-    setYear(now->tm_year+1900);
-    setMonth(now->tm_mon+1);
-    setDay(now->tm_mday);
+    auto now = std::chrono::system_clock::now();
+    std::time_t now_time_t = std::chrono::system_clock::to_time_t(now);
+    std::tm* now_tm = std::localtime(&now_time_t);
+    setYear(now_tm->tm_year+1900);
+    setMonth(now_tm->tm_mon+1);
+    setDay(now_tm->tm_mday);
+
 }
 std::string Date::getDateAsString() const{
     return std::to_string(day) + "." + std::to_string(month) + "." + std::to_string(year);

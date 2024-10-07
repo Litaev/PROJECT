@@ -21,10 +21,7 @@ void Refueling::setPricePerLitre(float pricePerLitre) {
     price_per_litre = pricePerLitre;
 }
 std::string Refueling::FuelTypeNameToStringFun() const{
-    if (FuelTypeToString.find(car_fuel_type) != FuelTypeToString.end()) {
-        return FuelTypeToString.find(car_fuel_type)->second;
-    }
-    return "Unknown";
+    return FuelTypeToString.find(car_fuel_type)->second;
 }
 void Refueling::printEventInfo(){
     cout << "Event Type: Refueling" << endl;
