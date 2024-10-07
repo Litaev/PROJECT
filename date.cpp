@@ -20,12 +20,22 @@ void Date::setDay(unsigned int new_day){
     day = new_day;
 }
 void Date::setNowDate(){
+
     auto now = std::chrono::system_clock::now();
-    std::time_t now_time_t = std::chrono::system_clock::to_time_t(now);
-    std::tm* now_tm = std::localtime(&now_time_t);
-    setYear(now_tm->tm_year+1900);
-    setMonth(now_tm->tm_mon+1);
-    setDay(now_tm->tm_mday);
+    std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+    std::tm local_time = *std::localtime(&now_c);
+    setDay(local_time.tm_mday);        // День месяца
+    setMonth(local_time.tm_mon + 1);   // Месяц (от 0 до 11, поэтому +1)
+    setYear(local_time.tm_year + 1900); // Год (с 1900 года)
+
+//        auto now = std::chrono::system_clock::now();
+//        auto now_time_t = std::chrono::system_clock::to_time_t(now);
+//        std::tm now_tm{};
+//        localtime_r(&now_time_t, &now_tm);
+//        const std::tm* p_now_tm = &now_tm;
+
+
+
 
 }
 std::string Date::getDateAsString() const{
