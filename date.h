@@ -4,8 +4,6 @@
 #include <string>
 #include <memory>
 #include <chrono>
-
-
 class Date {
     unsigned int year;
     unsigned int month;
