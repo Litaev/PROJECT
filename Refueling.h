@@ -14,7 +14,7 @@ public:
     void setAmountOfLitres(float amountOfLitres) override;
     float getPricePerLitre() const;
     void setPricePerLitre(float pricePerLitre) override;
-    std::string FuelTypeNameToStringFun();
+    std::string FuelTypeNameToStringFun() const;
     void printEventInfo() override;
 };
 

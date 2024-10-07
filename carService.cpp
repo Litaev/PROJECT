@@ -3,22 +3,21 @@
 #include <iostream>
 using namespace std;
 
-SERVICE_NAME CarService::getServiceType() {
+SERVICE_NAME CarService::getServiceType() const{
     return service_type;
 }
 void CarService::setServiceType(SERVICE_NAME serviceType) {
     service_type = serviceType;
 }
-std::string CarService::getServiceTypeAsString() {
+std::string CarService::getServiceTypeAsString() const{
     return service_type_string;
 }
 void CarService::setServiceTypeAsString(std::string &serviceName) {
     service_type_string = serviceName;
 }
-std::string CarService::ServiceNameToStringFun(){
-    const auto& it = ServiceNameToString.find(service_type);
-    if (it != ServiceNameToString.end()) {
-        return it->second;
+std::string CarService::ServiceNameToStringFun() const{
+    if (ServiceNameToString.find(service_type) != ServiceNameToString.end()) {
+        return ServiceNameToString.find(service_type)->second;
     }
     return "Unknown";
 }

@@ -49,7 +49,7 @@ void User::printCarsInfo() const{
         cout << "Car mileage: " << car_list[x]->getCarMileage() << endl;
         cout << "Car money spent: " << car_list[x]->getCarMoneySpent() << endl;
         cout << "Car add date: " << car_list[x]->getCarAddDateAsString() << endl;
-        cout << "Car fuel type: " << car_list[x]->Car::FuelTypeToStringFun(car_list[x]->getCarFuelType()) << endl;
+        cout << "Car fuel type: " << Car::FuelTypeToStringFun(car_list[x]->getCarFuelType()) << endl;
         cout << "Car events amount: " << car_list[x]->getEventList().size() << endl;
         cout << "--- Car " << x+1 << " ---" << endl;
     }

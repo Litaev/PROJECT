@@ -16,13 +16,13 @@ class Car {
     FUEL_TYPE car_fuel_type;
     std::vector<std::shared_ptr<Event>> event_list;
 public:
-    void setCar(std::string new_car_name, std::string new_car_gov_number, unsigned new_car_mileage, FUEL_TYPE new_car_fuel_type);
+    void setCar(std::string_view new_car_name, std::string_view new_car_gov_number, unsigned new_car_mileage, FUEL_TYPE new_car_fuel_type);
     std::string getCarName() const;
-    void setCarName(std::string new_car_name);
+    void setCarName(std::string_view new_car_name);
     void setCarFuelType(FUEL_TYPE new_fuel_type);
     FUEL_TYPE getCarFuelType() const;
     std::string getCarGovNumber() const;
-    void setCarGovNumber(std::string new_car_gov_number);
+    void setCarGovNumber(std::string_view new_car_gov_number);
     unsigned int getCarMileage() const;
     void setCarMileage(unsigned int new_car_mileage);
     float getCarMoneySpent() const;

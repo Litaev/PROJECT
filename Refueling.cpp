@@ -20,10 +20,9 @@ float Refueling::getPricePerLitre() const{
 void Refueling::setPricePerLitre(float pricePerLitre) {
     price_per_litre = pricePerLitre;
 }
-std::string Refueling::FuelTypeNameToStringFun(){
-    const auto& it = FuelTypeToString.find(car_fuel_type);
-    if (it != FuelTypeToString.end()) {
-        return it->second;
+std::string Refueling::FuelTypeNameToStringFun() const{
+    if (FuelTypeToString.find(car_fuel_type) != FuelTypeToString.end()) {
+        return FuelTypeToString.find(car_fuel_type)->second;
     }
     return "Unknown";
 }

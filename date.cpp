@@ -1,6 +1,6 @@
 
 #include "date.h"
-#include <time.h>
+#include <ctime>
 unsigned int Date::getYear() const{
     return year;
 }

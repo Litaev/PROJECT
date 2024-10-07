@@ -9,7 +9,7 @@ using namespace std;
 string Car::getCarName() const{
     return car_name;
 }
-void Car::setCarName(const string new_car_name) {
+void Car::setCarName(string_view new_car_name) {
     this->car_name = new_car_name;
 }
 void Car::setCarFuelType(FUEL_TYPE new_fuel_type){
@@ -21,7 +21,7 @@ FUEL_TYPE Car::getCarFuelType() const{
 string Car::getCarGovNumber() const{
     return car_gov_number;
 }
-void Car::setCarGovNumber(const string new_car_gov_number) {
+void Car::setCarGovNumber(string_view new_car_gov_number) {
     car_gov_number = new_car_gov_number;
 }
 unsigned int Car::getCarMileage() const{
@@ -39,7 +39,7 @@ void Car::setCarMoneySpent(float carMoneySpent) {
 std::string Car::getCarAddDateAsString() const{
     return car_add_date.getDateAsString();
 }
-void Car::setCar(const string new_car_name, const string new_car_gov_number, unsigned new_car_mileage, FUEL_TYPE new_car_fuel_type){
+void Car::setCar(string_view new_car_name, string_view new_car_gov_number, unsigned new_car_mileage, FUEL_TYPE new_car_fuel_type){
     setCarName(new_car_name);
     setCarGovNumber(new_car_gov_number);
     setCarMileage(new_car_mileage);
@@ -136,8 +136,8 @@ void Car::deleteEventListElement(){
     unsigned int chosen_id;
     cout << "Choose id of event to delete:" << endl;
     for (unsigned int element_id = 0; element_id < event_list.size(); element_id++){
-        cout << "ID: " << element_id << " Event name: " << event_list[element_id]->
-        consumptionNameToStringFun(event_list[element_id]->getEventType()) << " Event date: "
+        cout << "ID: " << element_id << " Event name: " <<
+        Event::consumptionNameToStringFun(event_list[element_id]->getEventType()) << " Event date: "
         << event_list[element_id]->getEventDateAsString() << endl;
     }
     cout << "Your choice: ";
@@ -146,9 +146,8 @@ void Car::deleteEventListElement(){
     updateCarMoneySpent();
 }
 std::string Car::FuelTypeToStringFun(FUEL_TYPE name){
-    const auto& it = FuelTypeToString.find(name);
-    if (it != FuelTypeToString.end()) {
-        return it->second;
+    if (FuelTypeToString.find(name) != FuelTypeToString.end()) {
+        return FuelTypeToString.find(name)->second;
     }
     return "Unknown";
 }

@@ -32,9 +32,8 @@ string Event::getEventDateAsString() const{
     return event_date.getDateAsString();
 }
 string Event::consumptionNameToStringFun(CONSUMPTION_NAME name){
-    const auto& it = ConsumptionNameToString.find(name);
-    if (it != ConsumptionNameToString.end()) {
-        return it->second;
+    if (ConsumptionNameToString.find(name) != ConsumptionNameToString.end()) {
+        return ConsumptionNameToString.find(name)->second;
     }
     return "Unknown";
 }
